@@ -5,8 +5,8 @@
 ### TODO list
 - colors (done)
 - running commands with nice formatting (done)
-- yes/no confirm
-- input with defualt
+- yes/no confirm (done)
+- input with defualt (done)
 - input with options
-- just input
+- just input (done)
 - `and more....`

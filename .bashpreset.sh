@@ -1,4 +1,54 @@
-source ./.bashcolors.sh
+#source ./.bashcolors.sh
+
+function line_up {
+    echo -ne "\e[$1A"
+}
+
+function clear_line {
+    echo -ne "\e[2K\r"
+}
+
+function is_user {
+    [[ $EUID -eq $1 ]]
+}
+
+function ask_empty {
+    RET=""
+    read -p "$1 " RET
+    printf "$RET"
+}
+
+function ask {
+    RET=$(ask_empty "$1")
+    while [[ -z $RET ]]; do
+        RET=$(ask_empty "$1")
+    done
+    printf "$RET"
+}
+
+function ask_with_default {
+    RET=$(ask_empty "$2[$1]:")
+    if [[ -z $RET ]]; then
+        RET=$1
+    fi
+    printf "$RET"
+}
+
+function prompt {
+    RET=$(ask_empty "$1[Y/n]?" | tr '[:upper:]' '[:lower:]')
+    while [[ -z $RET ]] || [[ $RET != "y" ]] && [[ $RET != "n" ]]; do
+        RET=$(ask_empty "$1[Y/n]?" | tr '[:upper:]' '[:lower:]')
+    done
+    printf "$RET"
+}
+
+function prompt_autoyes {
+    RET=$(ask_empty "$1[Y/n]?")
+    while [[ -z $RET ]]; do
+        RET="y"
+    done
+    printf "$(echo $RET | tr '[:upper:]' '[:lower:]')"
+}
 
 function count_command_runtime {
     tmpfile=$1
@@ -51,5 +101,13 @@ function run_command {
         if [[ $AP_EXIT_ON_FAIL -ne 0 ]] && [[ $exit_code -ne 0 ]]; then
             exit $exit_code
         fi
+    done
+}
+
+function run_command_normal {
+    local arg;
+    for arg; do
+        printf "$AP_COLOR_GREEN+$AP_COLOR_RESET %s\n" "$arg"
+        eval "${arg}"
     done
 }

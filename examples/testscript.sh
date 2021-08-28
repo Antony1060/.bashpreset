@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ".bashpreset.sh"
+source .bashpreset.sh
+
+if
 
 AP_EXIT_ON_FAIL=0
 

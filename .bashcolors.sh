@@ -42,11 +42,3 @@ AP_COLOR_BG_LIGHT_BLUE="\e[104m"
 AP_COLOR_BG_LIGHT_MAGENTA="\e[105m"
 AP_COLOR_BG_LIGHT_CYAN="\e[106m"
 AP_COLOR_BG_WHITE="\e[107m"
-
-function line_up {
-    echo -ne "\e[$1A"
-}
-
-function clear_line {
-    echo -ne "\e[2K\r"
-}
