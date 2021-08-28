@@ -50,6 +50,10 @@ function prompt_autoyes {
     printf "$(echo $RET | tr '[:upper:]' '[:lower:]')"
 }
 
+function log_info {
+    printf "$AP_COLOR_LIGHT_GREEN →$AP_COLOR_RESET $1\n"
+}
+
 function count_command_runtime {
     tmpfile=$1
     arg=$2
@@ -74,7 +78,7 @@ function count_command_runtime {
             if [[ $exit_code -ne 0 ]]; then
                 printf "$AP_COLOR_RED${cmd_time}s($exit_code) $AP_COLOR_DARK_GRAY|$AP_COLOR_RESET %s\n" "${*:2}"
             else
-                printf "$AP_COLOR_GREEN${cmd_time}s $AP_COLOR_DARK_GRAY|$AP_COLOR_RESET %s\n" "${*:2}"
+                printf "$AP_COLOR_LIGHT_GREEN${cmd_time}s $AP_COLOR_DARK_GRAY|$AP_COLOR_RESET %s\n" "${*:2}"
             fi
             rm $tmpfile
             break;
@@ -107,7 +111,7 @@ function run_command {
 function run_command_normal {
     local arg;
     for arg; do
-        printf "$AP_COLOR_GREEN+$AP_COLOR_RESET %s\n" "$arg"
+        printf "$AP_COLOR_LIGHT_GREEN+$AP_COLOR_RESET %s\n" "$arg"
         eval "${arg}"
     done
 }
