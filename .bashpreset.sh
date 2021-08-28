@@ -113,5 +113,10 @@ function run_command_normal {
     for arg; do
         printf "$AP_COLOR_LIGHT_GREEN+$AP_COLOR_RESET %s\n" "$arg"
         eval "${arg}"
+
+        # exit if AP_EXIT_ON_FAIL is set and enabled and $? is not 0
+        if [[ $AP_EXIT_ON_FAIL -ne 0 ]] && [[ $? -ne 0 ]]; then
+            exit $?
+        fi
     done
 }

@@ -1,11 +1,6 @@
 #!/bin/bash
 
-source .bashpreset.sh
+source <(curl -sL https://raw.githubusercontent.com/Antony1060/.bashpreset/master/.bashcolors.sh)
+source <(curl -sL https://raw.githubusercontent.com/Antony1060/.bashpreset/master/.bashpreset.sh)
 
-if
-
-AP_EXIT_ON_FAIL=0
-
-# this command will fail, and if AP_EXIT_ON_FAIL is set to 1, program will exit after
-run_command "sleep 2 && echo hi && false"
-run_command "echo hi && sleep 4"
+run_command "sleep 10 && echo hi"
